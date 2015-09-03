@@ -134,28 +134,28 @@ function review_callback($atts, $content = '')
 	    
 	    var timedInterval = window.setInterval(animateSlider, " . $time . "000);
 	    
-	    $('#textBubbleNumber-1').live('click', function() {
+	    $('.textBubbleNumber-1').live('click', function() {
 	        showhide(1);
 	    });
 
-	    $('#textBubbleNumber-2').live('click', function() {
+	    $('.textBubbleNumber-2').live('click', function() {
 	        showhide(2);
 	    });
 
-	    $('#textBubbleNumber-3').live('click', function() {
+	    $('.textBubbleNumber-3').live('click', function() {
 	        showhide(3);
 	    });
 
 
-	    $('#hidden-textBubbleNumber-1').live('click', function() {
+	    $('.hidden-textBubbleNumber-1').live('click', function() {
 	        showhide(1);
 	    });
 
-	    $('#hidden-textBubbleNumber-2').live('click', function() {
+	    $('.hidden-textBubbleNumber-2').live('click', function() {
 	        showhide(2);
 	    });
 
-	    $('#hidden-textBubbleNumber-3').live('click', function() {
+	    $('.hidden-textBubbleNumber-3').live('click', function() {
 	        showhide(3);
 	    });
 		
@@ -170,13 +170,15 @@ function review_callback($atts, $content = '')
 		}
 		
 	    function showhide(id) {
-	        if ($('#textBubbleNumber-' + id).is(':visible')) {
-	            $('#textBubbleNumber-' + id).hide();
+	        if ($('.textBubbleNumber-' + id).is(':visible')) {
+	            $('.textBubbleNumber-' + id).hide();
 	            $('#hidden-textBubbleNumber-' + id).show('slow');
+	            $('.hidden-textBubbleNumber-' + id).show('slow');
 	            window.clearInterval(timedInterval)
 	            timedInterval = null;
 	        } else {
-	            $('#textBubbleNumber-' + id).show();
+	            $('.textBubbleNumber-' + id).show();
+	            $('.hidden-textBubbleNumber-' + id).hide();
 	            $('#hidden-textBubbleNumber-' + id).hide();
 	    		timedInterval = window.setInterval(animateSlider, " . $time . "000);
 	        }
@@ -203,8 +205,8 @@ function review_callback($atts, $content = '')
 	            		$(this).css('cursor', 'pointer')});
 					var hiddenDiv = 'hidden-' + this.id;
 					var div = document.getElementById(hiddenDiv)
-						
-	                $('<p id=\"hidden-textBubbleNumber-' + (index + 1) + '\" class=\"bubbl-text hidden-text\">' + original + '</p>').hide().insertAfter(element);
+					$('.textBubbleNumber-' + (index + 1)).show();
+	                $('<p id=\"hidden-textBubbleNumber-' + (index + 1) + '\" class=\"bubbl-text hidden-text hidden-textBubbleNumber-' + (index + 1) + \">' + original + '</p>').hide().insertAfter(element);
 				} else {
 					this.id = '';
 				}
@@ -236,6 +238,33 @@ function review_callback($atts, $content = '')
 .hidden-text {
 	cursor: pointer;
 }
+
+.more-button {
+	align-self: middle;
+    margin-top: -5%;
+    margin-bottom: 3%;
+    margin-right: 5%;
+    margin-left: 2%;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #523d26;
+    background: transparent;
+    padding: 1% 2%;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: rgba(0,0,0,1) 0 0px 0;
+    -moz-box-shadow: rgba(0,0,0,1) 0 0px 0;
+    box-shadow: rgba(0,0,0,1) 0 0px 0;
+    text-shadow: rgba(0,0,0,.4) 0 0px 0;
+    font-size: 100%px;
+    font-weight: bold;
+    font-family: Ubuntu, Helvetica, Arial, Sans-Serif;
+    text-decoration: none;
+    vertical-align: middle;
+    color: #503D20;
+}
+
 .progressBar {
 	display: flex;
 	justify-content: center;
@@ -379,7 +408,7 @@ function review_callback($atts, $content = '')
 
  .review-module h2{
     " . $color . "
-    font-size: 3.5em;
+    font-size: 3em;
     line-height: 1.1em;
     font-weight: 700;
 	padding-top: 25px;

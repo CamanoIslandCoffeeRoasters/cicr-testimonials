@@ -135,7 +135,6 @@ function review_callback($atts, $content = '')
 	    var timedInterval = window.setInterval(animateSlider, " . $time . "000);
 	    
 	    $('#textBubbleNumber-1').live('click', function() {
-	    	console.log('test');
 	        showhide(1);
 	    });
 
@@ -162,13 +161,12 @@ function review_callback($atts, $content = '')
 		
 		
 		function progress(\$element, flipflop) {
-			console.log(flipflop%2);
 			if((flipflop % 2) == 1) {
-	    		\$element.find('div').animate({ width: '100%' }, " . $time . "000);
-	    	} 
+	    		\$element.find('div').animate({ width: '0' }, 1);
+	    		\$element.find('div').animate({ width: '100%' }, " . $time . "000); }
 			if((flipflop % 2) == 0) {
-	    		\$element.find('div').animate({ width: '0%' }, " . $time . "000);
-	    	}
+	    		\$element.find('div').animate({ width: '28%' }, 1);
+	    		\$element.find('div').animate({ width: '0%' }, " . $time . "000); }
 		}
 		
 	    function showhide(id) {
@@ -179,7 +177,7 @@ function review_callback($atts, $content = '')
 	            timedInterval = null;
 	        } else {
 	            $('#textBubbleNumber-' + id).show();
-	            $('#hidden-textBubbleNumber-' + id).hide('slow');
+	            $('#hidden-textBubbleNumber-' + id).hide();
 	    		timedInterval = window.setInterval(animateSlider, " . $time . "000);
 	        }
 	    }
@@ -188,20 +186,28 @@ function review_callback($atts, $content = '')
 	    	$('#review-bubble-area').fadeOut('slow');
 			setTimeout(reviewSlider, 500)
 		}
-		var flipflop = 1;
 		
+		var flipflop = 1;
+			
 	    function reviewSlider() {
 		$.when($.ajax({url: '/wp-content/plugins/cicr-testimonials/ajax/testimonials.php'})).done(function(result) {
             $('#review-bubble-area').html(result).fadeIn('slow');
-			console.log(flipflop);
 			progress($('.progressBar'), flipflop);
-            $('.review-content').hover(function() {
-                $(this).css('cursor', 'pointer')});
 				
             $('.line-clamp').each(function(index, element) {
                 var original = element.textContent;
-                element.textContent = shorten(element.textContent, 190, element);
-                $('<p id=\"hidden-textBubbleNumber-' + (index + 1) + '\" class=\"bubbl-text\">' + original + '</p>').hide().insertAfter(element);
+				var text = shorten(element.textContent, 190, element);
+                element.textContent = text[1];
+				if (text[0] == 1) {
+	            	$(this).hover(function() {
+	            		$(this).css('cursor', 'pointer')});
+					var hiddenDiv = 'hidden-' + this.id;
+					var div = document.getElementById(hiddenDiv)
+						
+	                $('<p id=\"hidden-textBubbleNumber-' + (index + 1) + '\" class=\"bubbl-text hidden-text\">' + original + '</p>').hide().insertAfter(element);
+				} else {
+					this.id = '';
+				}
 			})
 			flipflop++;
         	})
@@ -209,15 +215,17 @@ function review_callback($atts, $content = '')
 
 	    function shorten(text, maxLength, element) {
 	        var ret = text;
+			var clipped = 0;
 	        if (ret.length > maxLength) {
 	            ret = ret.substr(0, maxLength - 3) + ' ...';
+				var clipped = 1;
 	        } else {
 	            var lines = 40 / maxLength;
 	            if (lines > 0 < 1) {
-	                $(this).height(1000);
+	                $(this).height(1200);
 	            }
 	        }
-	        return ret;
+	        return [clipped, ret];
 	    }
 
 	})
@@ -225,6 +233,9 @@ function review_callback($atts, $content = '')
 	<style>
 	@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
 	
+.hidden-text {
+	cursor: pointer;
+}
 .progressBar {
 	display: flex;
 	justify-content: center;
@@ -235,10 +246,15 @@ function review_callback($atts, $content = '')
 	margin: 0 -15%;
 }
 
+.no-image:before {
+	content: '\f110';
+	width: 100px;
+}
 .progressBar div {
     height: 100%;
     color: #fff;
     width: 0;
+    max-width: 100%;
     $background_color
 }
 
@@ -246,7 +262,7 @@ function review_callback($atts, $content = '')
 		font-family: 'Open Sans', Arial, sans-serif;
 		color: #42321C;
 		margin-top: 30px;
-		margin-bottom: 10%px;
+		margin-bottom: 10px;
 }
 
 .bubble {

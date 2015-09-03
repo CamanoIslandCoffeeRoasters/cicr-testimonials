@@ -26,9 +26,17 @@ foreach ($reviews as $review) {
 		$stars = $stars . '<div class="star-five "></div>';
 		$i++;
 	}
+	$class = '';
+	$background = '';
+	$background = substr_replace(wp_get_attachment_url( get_post_thumbnail_id($review->ID)), '', 7, 0);
+	
+	if (strlen($background) > 5) {
+		$background = "background: url(" . $background . ");";
+	}
+	
 	echo "
 			<div class='bubble' style=' $margin;\" id='" . $id	 . "'>
-						<div class='bubble-image' style='background: url(" . substr_replace(wp_get_attachment_url( get_post_thumbnail_id($review->ID)), '', 7, 0)  . ");')></div>
+						<div class='bubble-image $class' style='" . $background . "'></div>
 					<div class='first-row'>
 							<h3>$review->post_title	</h3>
 					</div>

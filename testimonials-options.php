@@ -206,7 +206,7 @@ function review_callback($atts, $content = '')
 					var hiddenDiv = 'hidden-' + this.id;
 					var div = document.getElementById(hiddenDiv)
 					$('.textBubbleNumber-' + (index + 1)).show();
-	                $('<p id=\"hidden-textBubbleNumber-' + (index + 1) + '\" class=\"bubbl-text hidden-text hidden-textBubbleNumber-' + (index + 1) + \">' + original + '</p>').hide().insertAfter(element);
+	                $('<p id=\"hidden-textBubbleNumber-' + (index + 1) + '\" class=\"bubbl-text hidden-text\">' + original + '</p>').hide().insertAfter(element);
 				} else {
 					this.id = '';
 				}

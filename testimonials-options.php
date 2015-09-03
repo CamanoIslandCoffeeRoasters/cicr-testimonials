@@ -246,10 +246,6 @@ function review_callback($atts, $content = '')
 	margin: 0 -15%;
 }
 
-.no-image:before {
-	content: '\f110';
-	width: 100px;
-}
 .progressBar div {
     height: 100%;
     color: #fff;

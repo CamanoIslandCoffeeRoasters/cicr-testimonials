@@ -284,6 +284,7 @@ function review_callback($atts, $content = '')
     display: -webkit-flex;     /* NEW - Chrome */
     display: flex;  
 	justify-content: center;
+	-webkit-justify-content: center;
     min-width: 100%;
     height: 10px;
     background-color: #292929;
@@ -308,8 +309,12 @@ function review_callback($atts, $content = '')
 
 .bubble {
 	padding-top: 10px;
-	display: flex;
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
 	align-self: center;
+	-webkit-align-self: center;
 	justify-content: space-around;
 	width: 300px;
 	border-radius: 5px;
@@ -374,7 +379,8 @@ function review_callback($atts, $content = '')
   display: -ms-flexbox;      /* TWEENER - IE 10 */
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;  
-	align-content: middle;
+	-webkit-align-content: middle;
+align-content: middle;
 	margin: 25px auto
 }
 

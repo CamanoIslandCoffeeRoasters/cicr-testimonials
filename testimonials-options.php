@@ -182,14 +182,14 @@ function review_callback($atts, $content = '')
 	    function showhide(id) {
 	        if ($('.textBubbleNumber-' + id).is(':visible')) {
 	            $('.textBubbleNumber-' + id).hide();
-	            $('#hidden-textBubbleNumber-' + id).show('slow');
+	            $('.hidden-textBubbleNumber-' + id).show('slow');
 	            $('.hidden-textBubbleNumber-' + id).show('slow');
 	            window.clearInterval(timedInterval)
 	            timedInterval = null;
 	        } else {
 	            $('.textBubbleNumber-' + id).show();
 	            $('.hidden-textBubbleNumber-' + id).hide();
-	            $('#hidden-textBubbleNumber-' + id).hide();
+	            $('.hidden-textBubbleNumber-' + id).hide();
 	    		timedInterval = window.setInterval(animateSlider, " . $time . "000);
 	        }
 	    }

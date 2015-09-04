@@ -9,50 +9,61 @@ Author URI:
 License: GNU
 */
 
-if (!defined('TO_URL')) define('TO_URL', plugins_url() . '/' . basename(dirname(__FILE__)) . '/');
+if (!defined('TO_URL'))
+    define('TO_URL', plugins_url() . '/' . basename(dirname(__FILE__)) . '/');
 
-if (!defined('TESTIMONIALS_FRONTEND')) define('TESTIMONIALS_FRONTEND', untrailingslashit(plugin_dir_path(__FILE__)));
+if (!defined('TESTIMONIALS_FRONTEND'))
+    define('TESTIMONIALS_FRONTEND', untrailingslashit(plugin_dir_path(__FILE__)));
 
-if (!defined('TO_PATH')) define('TO_PATH', plugin_dir_path(__FILE__));
+if (!defined('TO_PATH'))
+    define('TO_PATH', plugin_dir_path(__FILE__));
 register_activation_hook(__FILE__, 'activationTables');
 
 register_activation_hook(__FILE__, 'register_testimonials');
 
-function register_tstimonials() {	
-	echo "";
-	
+function register_tstimonials()
+{
+    echo "";
+    
 }
 
 
-function my_custom_post_testimonial() {
-  $labels = array(
-    'name'               => _x( 'Testimonials', 'post type general name' ),
-    'singular_name'      => _x( 'Testimonial', 'post type singular name' ),
-    'add_new'            => _x( 'Add New', 'testimonial' ),
-    'add_new_item'       => __( 'Add New Testimonial' ),
-    'edit_item'          => __( 'Edit Testimonial' ),
-    'new_item'           => __( 'New Testimonial' ),
-    'all_items'          => __( 'All Testimonials' ),
-    'view_item'          => __( 'View Testimonial' ),
-    'search_items'       => __( 'Search Testimonials' ),
-    'not_found'          => __( 'No Testimonials found' ),
-    'not_found_in_trash' => __( 'No Testimonials found in the Trash' ), 
-    'parent_item_colon'  => '',
-    'menu_name'          => 'Testimonials'
-  );
-  $args = array(
-    'labels'        => $labels,
-    'description'   => 'Holds our testimonials and testimonial specific data',
-    'public'        => true,
-    'menu_icon' 	=> 'dashicons-format-quote',
-    'menu_position' => 5,
-    'supports'      => array( 'title', 'editor', 'thumbnail', 'excerpt', 'comments' ),
-    'has_archive'   => true,
-  );
-  register_post_type( 'testimonial', $args ); 
+function my_custom_post_testimonial()
+{
+    $labels = array(
+        'name' => _x('Testimonials', 'post type general name'),
+        'singular_name' => _x('Testimonial', 'post type singular name'),
+        'add_new' => _x('Add New', 'testimonial'),
+        'add_new_item' => __('Add New Testimonial'),
+        'edit_item' => __('Edit Testimonial'),
+        'new_item' => __('New Testimonial'),
+        'all_items' => __('All Testimonials'),
+        'view_item' => __('View Testimonial'),
+        'search_items' => __('Search Testimonials'),
+        'not_found' => __('No Testimonials found'),
+        'not_found_in_trash' => __('No Testimonials found in the Trash'),
+        'parent_item_colon' => '',
+        'menu_name' => 'Testimonials'
+    );
+    $args   = array(
+        'labels' => $labels,
+        'description' => 'Holds our testimonials and testimonial specific data',
+        'public' => true,
+        'menu_icon' => 'dashicons-format-quote',
+        'menu_position' => 5,
+        'supports' => array(
+            'title',
+            'editor',
+            'thumbnail',
+            'excerpt',
+            'comments'
+        ),
+        'has_archive' => true
+    );
+    register_post_type('testimonial', $args);
 }
 
-add_action( 'init', 'my_custom_post_testimonial' );
+add_action('init', 'my_custom_post_testimonial');
 
 ////////////////////////////////////////////////////
 //		  The Coffee Review Widget shortcode      //
@@ -61,71 +72,70 @@ add_action( 'init', 'my_custom_post_testimonial' );
 add_shortcode('coffee_review_content', 'review_callback');
 
 function review_callback($atts, $content = '')
-	{
-	$a = shortcode_atts(array(
-		'id' => '0',
-		'color' => 'white',
-		'time' => '11'
-	) , $atts);
-	$opacity = 1;
-	$color = isset($a['color']) ? $a['color'] : "blue";
-	$id = isset($a['id']) ? $a['id'] : "0";
-	$time = isset($a['time']) ? $a['time'] : "9";
-	switch ($color)
-		{
-	case "blue":
-		$background_color = "background: rgba(133, 170, 177, $opacity);";
-		$color = "color: #FFFFFF;";
-		break;
-
-	case "brown":
-		$background_color = "background:rgba(80, 61, 32, $opacity);";
-		$color = "color: #FFFFFF;";
-		break;
-
-	case "purple":
-		$background_color = "background:rgba(122, 81, 113, $opacity);";
-		$color = "color: #FFFFFF;";
-		break;
-
-	case "green":
-		$background_color = "background:rgba(51, 63, 40, $opacity);";
-		$color = "color: #FFFFFF;";
-		break;
-
-	case "holiday-red":
-		$background_color = "background:rgba(220, 26, 16, $opacity);";
-		$color = "color: #FFFFFF;";
-		break;
-
-	case "beige":
-		$background_color = "background:rgba(234, 214, 190, $opacity);";
-		$color = "color: #503D20;";
-		$loading_bar = "rgba(234, 214, 190, $opacity);";
-		break;
-
-	case "grey":
-		$background_color = "background:rgba(199, 203, 205, $opacity);";
-		$color = "color: #503D20;";
-		break;
-
-	case "white":
-		$background_color = "background:rgba(255,255,255, 1);";
-		$color = "color: #503D20;";
-		break;
-
-	case "image":
-		$background_color = "background:rgba(255,255,255, 1);";
-		$color = "color: rgba(255,255,255, 1);";
-		break;
-
-	default:
-		$background_color = "rgba(255,255,255, 1);";
-		$color = "color: #503D20;";
-		break;
-		}
-
-	$return_content = "
+{
+    $a       = shortcode_atts(array(
+        'id' => '0',
+        'color' => 'white',
+        'time' => '11'
+    ), $atts);
+    $opacity = 1;
+    $color   = isset($a['color']) ? $a['color'] : "blue";
+    $id      = isset($a['id']) ? $a['id'] : "0";
+    $time    = isset($a['time']) ? $a['time'] : "9";
+    switch ($color) {
+        case "blue":
+            $background_color = "background: rgba(133, 170, 177, $opacity);";
+            $color            = "color: #FFFFFF;";
+            break;
+        
+        case "brown":
+            $background_color = "background:rgba(80, 61, 32, $opacity);";
+            $color            = "color: #FFFFFF;";
+            break;
+        
+        case "purple":
+            $background_color = "background:rgba(122, 81, 113, $opacity);";
+            $color            = "color: #FFFFFF;";
+            break;
+        
+        case "green":
+            $background_color = "background:rgba(51, 63, 40, $opacity);";
+            $color            = "color: #FFFFFF;";
+            break;
+        
+        case "holiday-red":
+            $background_color = "background:rgba(220, 26, 16, $opacity);";
+            $color            = "color: #FFFFFF;";
+            break;
+        
+        case "beige":
+            $background_color = "background:rgba(234, 214, 190, $opacity);";
+            $color            = "color: #503D20;";
+            $loading_bar      = "rgba(234, 214, 190, $opacity);";
+            break;
+        
+        case "grey":
+            $background_color = "background:rgba(199, 203, 205, $opacity);";
+            $color            = "color: #503D20;";
+            break;
+        
+        case "white":
+            $background_color = "background:rgba(255,255,255, 1);";
+            $color            = "color: #503D20;";
+            break;
+        
+        case "image":
+            $background_color = "background:rgba(255,255,255, 1);";
+            $color            = "color: rgba(255,255,255, 1);";
+            break;
+        
+        default:
+            $background_color = "rgba(255,255,255, 1);";
+            $color            = "color: #503D20;";
+            break;
+    }
+    
+    $return_content = "
  <script>
  
 	jQuery(document).ready(function($) {
@@ -266,7 +276,11 @@ function review_callback($atts, $content = '')
 }
 
 .progressBar {
-	display: flex;
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;  
 	justify-content: center;
     min-width: 100%;
     height: 10px;
@@ -291,24 +305,28 @@ function review_callback($atts, $content = '')
 }
 
 .bubble {
-		padding-top: 10px;
-		display: flex;
-		align-self: center;
-		justify-content: space-around;
-		width: 300px;
-		border-radius: 5px;
-		background: #FFFFFF;
-		margin-top: 50px;
-		-webkit-flex-direction: column;
-   		flex-direction: column;
-	   -webkit-align-items: center;
-	   align-items: center;
-	   -webkit-justify-content: center;
-	   justify-content: center;
+	padding-top: 10px;
+	display: flex;
+	align-self: center;
+	justify-content: space-around;
+	width: 300px;
+	border-radius: 5px;
+	background: #FFFFFF;
+	margin-top: 50px;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+   -webkit-align-items: center;
+   align-items: center;
+   -webkit-justify-content: center;
+   justify-content: center;
 }
 
 .bubble-image {
-	display: flex;
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;  
 	width: 105px;
 	height: 105px;
 	border-radius: 75px;
@@ -324,16 +342,20 @@ function review_callback($atts, $content = '')
 }
 
 .callout {
-		position: relative;
-		display: flex;
-		vertical-align: bottom;
-		right: -30%;
-		width: 0;
-		height: 0;
-		border-left: 25px solid transparent;
-		border-top: 30px solid #FFFFFF;
-		border-right: 0px solid transparent;
-		margin-bottom: 20px;
+	position: relative;
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;  
+	vertical-align: bottom;
+	right: -30%;
+	width: 0;
+	height: 0;
+	border-left: 25px solid transparent;
+	border-top: 30px solid #FFFFFF;
+	border-right: 0px solid transparent;
+	margin-bottom: 20px;
 }
 
 .first-row {
@@ -345,7 +367,11 @@ function review_callback($atts, $content = '')
 
 
 .star-row {
-	display: flex;
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;  
 	align-content: middle;
 	margin: 25px auto
 }
@@ -385,13 +411,21 @@ function review_callback($atts, $content = '')
       max-width:100%;
       ' ." . $color . " . ';
       text-align: center;
-      display: flex; 
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;  
       justify-content: space-between; 
       flex-wrap: wrap;
  }
 
  #review-bubble-area {
-      display: flex; 
+ 	  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;  
       justify-content: space-between; 
       flex-wrap: wrap;
       width:100%;
@@ -451,7 +485,7 @@ function review_callback($atts, $content = '')
 	<div id='review-bubble-area'></div>
 	</div>
 	<div class='progressBar'><div></div></div>";
-	return $return_content;
-	}
+    return $return_content;
+}
 
 ?>

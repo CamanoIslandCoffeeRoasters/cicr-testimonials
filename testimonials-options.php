@@ -404,7 +404,7 @@ function review_callback($atts, $content = '')
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
-      min-height: 600px;
+      min-height: 750px;
       padding-top: 1;
       padding-bottom: 10%;
       position: static;

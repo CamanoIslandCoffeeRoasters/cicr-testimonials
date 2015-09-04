@@ -44,7 +44,7 @@ foreach ($reviews as $review) {
 								$stars
 							</div>
 					<div class='review-content bubble-text'>
-						<p class='line-clamp textBubbleNumber-$review_counter'>$review->post_content</p>
+						<p class='line-clamp '>$review->post_content</p>
 					</div>
 						<div class='more-button textBubbleNumber-$review_counter' style='display: none;'>  MORE  </div>
 						<div class='more-button hidden-textBubbleNumber-$review_counter' style='display: none;'>  LESS  </div>

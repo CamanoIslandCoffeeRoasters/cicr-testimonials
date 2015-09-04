@@ -211,12 +211,14 @@ function review_callback($atts, $content = '')
 				var text = shorten(element.textContent, 190, element);
                 element.textContent = text[1];
 				if (text[0] == 1) {
+					console.log(this);
+					this.className = 'textBubbleNumber-' + (index + 1)
 	            	$(this).hover(function() {
 	            		$(this).css('cursor', 'pointer')});
 					var hiddenDiv = 'hidden-' + this.id;
 					var div = document.getElementById(hiddenDiv)
 					$('.textBubbleNumber-' + (index + 1)).show();
-	                $('<p id=\"hidden-textBubbleNumber-' + (index + 1) + '\" class=\"bubbl-text hidden-text\">' + original + '</p>').hide().insertAfter(element);
+	                $('<p class=\"bubble-text hidden-text hidden-textBubbleNumber-' + (index + 1) + '\">' + original + '</p>').hide().insertAfter(element);
 				} else {
 					this.id = '';
 				}

@@ -35,7 +35,7 @@ if (isset($_POST['testimonial'])) {
 	$review_counter = 1;
 	$reviews = get_posts($args);
 	foreach ($reviews as $review) {
-		if($review_counter == 2){ $margin = '';} else{$margin = 'margin-top: 10%;';}
+		if($review_counter == 2){ $margin = 'margin-top: 5%';} else{$margin = 'margin-top: 15%;';}
 		$id = "bubbleNumber" . $review_counter;
 		
 		$i=0;

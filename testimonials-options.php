@@ -86,17 +86,23 @@ function review_callback($atts, $content = '')
     $time    = isset($a['time']) ? $a['time'] : "9";
 	if ($a['backend'] == 1) {
 		$backend = "<div class='review-button'><h3 id='reviewAreaActuator'>What do YOU think?</h3></div>";
-	}
+		$top_margin = "margin-top: 30px;";
+		$bar_margin = "";
+		$corners = "border-radius: 5px 5px 0 0;";
+		$padding = "padding-left: 2.5%; padding-right: 2.5%;";
+		$box_shaddow = "-webkit-box-shadow: 0 1px 0px 0px 909496; -moz-box-shadow: 0 1px 0px 0px 909496; box-shadow: 0 5px 0px 0px #909496;";
+		$full_bar_width = "32%";
+		$progress_bar_border_radius = "border-radius: 0 0 5px 5px; margin-bottom: 20px;";
+	} else {
+		$full_bar_width = "28%";
+		$margin = "margin-left: -15%; margin-right:-15%;";
+    	$padding = "padding-left: 15%; padding-right: 15%;";
+		}
 	if ($a['stars'] == 0) {
 		$starDisplay = "display: none;";
 		$alignSubmit = "margin-left: 210px;";
 	} else {
-		$starDisplay = "
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;";
+		$starDisplay = "display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;";
 		$alignSubmit = "margin-left: 150px;";
 	}
     switch ($color) {
@@ -105,6 +111,11 @@ function review_callback($atts, $content = '')
             $color            = "color: #FFFFFF;";
             break;
         
+		case "twitter":
+			$background_color = "background: rgba(64, 153, 255, $opacity);";
+            $color            = "color: #FFFFFF;";
+            break;
+		
         case "brown":
             $background_color = "background:rgba(80, 61, 32, $opacity);";
             $color            = "color: #FFFFFF;";
@@ -216,7 +227,7 @@ function review_callback($atts, $content = '')
 	    		\$element.find('div').animate({ width: '0%' }, 1);
 	    		\$element.find('div').animate({ width: '100%' }, " . $time . "000); }
 			if((flipflop % 2) == 0) {
-	    		\$element.find('div').animate({ width: '28%' }, 1);
+	    		\$element.find('div').animate({ width: '" . $full_bar_width . "' }, 1);
 	    		\$element.find('div').animate({ width: '0%' }, " . $time . "000); }
 			if(flipflop == 'stop') {
 				\$element.find('div').stop(true, false);
@@ -310,6 +321,10 @@ function review_callback($atts, $content = '')
 }
 
 .more-button {
+	cursor: pointer;
+}
+
+.more-button {
 	align-self: middle;
     margin-top: -5%;
     margin-bottom: 3%;
@@ -378,7 +393,7 @@ function review_callback($atts, $content = '')
     height: 10px;
     background-color: #292929;
     align-self: flex-end !important;
-	margin: 0 -15%;
+	" . $margin . $progress_bar_border_radius . $box_shaddow . "
 }
 
 .progressBar div {
@@ -495,8 +510,7 @@ function review_callback($atts, $content = '')
 
  .review-module {
     " . $background_color . "
-    margin-left: -15%;
-    margin-right:-15%;
+    " . $margin . $top_margin . "
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -505,8 +519,7 @@ function review_callback($atts, $content = '')
     padding-top: 1;
     padding-bottom: 10%;
     position: static;
-    padding-left: 15%;
-    padding-right: 15%;
+	" . $padding . "
     max-width:100%;
     ' ." . $color . " . ';
     text-align: center;
@@ -519,6 +532,7 @@ function review_callback($atts, $content = '')
     flex-wrap: wrap;
     -webkit-flex:1 1 100%;
     -webkit-flex-flow: row wrap;
+	" . $box_shaddow . $corners . "
  }
 
  #review-bubble-area {

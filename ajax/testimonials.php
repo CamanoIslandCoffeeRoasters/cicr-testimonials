@@ -53,7 +53,7 @@ if (isset($_POST['testimonial'])) {
 		}
 		
 		echo "
-				<div class='bubble' style=' $margin;\" id='" . $id	 . "'>
+				<div class='bubble' style=' $margin;' id='" . $id	 . "'>
 							<div class='bubble-image $class' style='" . $background . "'></div>
 						<div class='first-row'>
 								<h3>$review->post_title	</h3>

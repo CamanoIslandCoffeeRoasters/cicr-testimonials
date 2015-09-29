@@ -418,22 +418,26 @@ function review_callback($atts, $content = '')
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
+	flex-direction: column;
+	-webkit-flex-direction: column;
 	-webkit-align-self: center;
 	justify-content: space-around;
 	width: 300px;
 	border-radius: 5px;
 	background: #FFFFFF;
-	margin-top: 50px;
+	margin-top: 65px !important;
 	-webkit-flex-direction: column;
 	flex-direction: column;
    -webkit-align-items: center;
-   align-items: center;
+   align-content: center;
    -webkit-justify-content: center;
    justify-content: center;
    margin-bottom: 20px;
+	flex-direction: column;
 }
 
 .bubble-image {
+	align-self: center;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -475,6 +479,7 @@ function review_callback($atts, $content = '')
 	margin-top: 10px;
 	widht: 100%;
 	align-items: flex-start;
+	margin-bottom: 5px;
 }
 
 
@@ -547,6 +552,7 @@ function review_callback($atts, $content = '')
     -webkit-flex:1 1 auto;
 	-webkit-flex-flow: row wrap;
     width: 100%;
+	padding-top: 10px;
 	min-height: 450px;
  }
 

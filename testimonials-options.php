@@ -85,19 +85,28 @@ function review_callback($atts, $content = '')
     $id      = isset($a['id']) ? $a['id'] : "0";
     $time    = isset($a['time']) ? $a['time'] : "9";
 	if ($a['backend'] == 1) {
+		
 		$backend = "<div class='review-button'><h3 id='reviewAreaActuator'>What do YOU think?</h3></div>";
 		$top_margin = "margin-top: 30px;";
 		$bar_margin = "";
 		$corners = "border-radius: 5px 5px 0 0;";
 		$padding = "padding-left: 2.5%; padding-right: 2.5%;";
-		$box_shaddow = "-webkit-box-shadow: 0 1px 0px 0px 909496; -moz-box-shadow: 0 1px 0px 0px 909496; box-shadow: 0 5px 0px 0px #909496;";
+		$box_shadow = "-webkit-box-shadow: 0 1px 0px 0px 909496; -moz-box-shadow: 0 1px 0px 0px 909496; box-shadow: 0 5px 0px 0px #909496;";
 		$full_bar_width = "32%";
 		$progress_bar_border_radius = "border-radius: 0 0 5px 5px; margin-bottom: 20px;";
+		$margin="";
+		
 	} else {
+		$backend = '';
+		$corners = '';
+		$progress_bar_border_radius = '';
+		$top_margin = '';
 		$full_bar_width = "28%";
+		$box_shadow = '';
 		$margin = "margin-left: -15%; margin-right:-15%;";
     	$padding = "padding-left: 15%; padding-right: 15%;";
 		}
+	
 	if ($a['stars'] == 0) {
 		$starDisplay = "display: none;";
 		$alignSubmit = "margin-left: 210px;";
@@ -393,7 +402,7 @@ function review_callback($atts, $content = '')
     height: 10px;
     background-color: #292929;
     align-self: flex-end !important;
-	" . $margin . $progress_bar_border_radius . $box_shaddow . "
+	" . $margin . $progress_bar_border_radius . $box_shadow . "
 }
 
 .progressBar div {
@@ -537,13 +546,14 @@ function review_callback($atts, $content = '')
     flex-wrap: wrap;
     -webkit-flex:1 1 100%;
     -webkit-flex-flow: row wrap;
-	" . $box_shaddow . $corners . "
+	" . $box_shadow . $corners . "
  }
 
  #review-bubble-area {
     display: -webkit-box;
     display: -moz-box;
-    display: -ms-flexbox;
+    display: -ms-flexbox;tent/plugins/cicr-testimonials/testimonials-options.php on line 519
+	
     display: -webkit-flex;
     display: flex;
     -webkit-justify-content: space-between;

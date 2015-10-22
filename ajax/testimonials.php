@@ -50,6 +50,9 @@ if (isset($_POST['testimonial'])) {
 		
 		if (strlen($background) > 5) {
 			$background = "background: url(" . $background . ");";
+		} else {
+			$plugindir = substr(TESTIMONIALS_FRONTEND, -37);
+			$background = "background: url( http://www.camanoislandcoffee.com" . $plugindir . "/cup.jpg )";
 		}
 		
 		echo "
